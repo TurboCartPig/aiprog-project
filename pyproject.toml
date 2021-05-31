@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "project"
+version = "0.1.0"
+description = "Final project for AI Programming at NTNU"
+authors = ["Dennis Kristiansen <denniskristiansen@protonmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+tensorflow = "^2.5"
+numpy = "^1.19"
+pandas = "^1.2"
+matplotlib = "^3.3"
+seaborn = "^0.11"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
