@@ -7,7 +7,7 @@ import os
 import tensorflow as tf
 from tensorflow.keras.preprocessing import image_dataset_from_directory
 
-# Label descriminant to class name
+# Label discriminant to class name
 classes = {
     1: "Danaus plexippus",
     2: "Heliconius charitonius",
@@ -21,8 +21,7 @@ classes = {
     10: "Vanessa cardui",
 }
 
-dataset_dir = "./datasets/leedsbutterfly/images"
-# label_mode = None  # Indicate that the files are in one big directory, not in subdirectories. The documentation for this field is simply wrong, this has been fixed in nightly tf.
+dataset_dir = "./datasets/gen"
 labels = "inferred"
 label_mode = "int"
 color_mode = "rgb"
@@ -72,7 +71,7 @@ validation = (
 )
 
 if __name__ == "__main__":
-    import matplotlib.pyplot as plt
+    from matplotlib import pyplot as plt
 
     # Show a sample of the training dataset to validate correct loading
     plt.figure(figsize=(10, 10))
