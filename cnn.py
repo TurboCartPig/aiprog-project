@@ -1,3 +1,5 @@
+import datetime
+
 import tensorflow as tf
 import tensorflow_addons as tfa
 from tensorflow.keras import Sequential, layers
@@ -8,18 +10,18 @@ import dataset
 model = Sequential(
     [
         layers.experimental.preprocessing.Rescaling(1.0 / 255),
-        layers.Conv2D(32, 3, activation="relu"),
+        layers.Conv2D(64, 3, activation="relu"),
         layers.MaxPooling2D(),
         layers.Conv2D(256, 3, activation="relu"),
         layers.MaxPooling2D(),
-        layers.Conv2D(64, 3, activation="selu"),
+        layers.Conv2D(64, 3, activation="relu"),
         layers.MaxPooling2D(),
         layers.Conv2D(32, 3, activation="relu", data_format="channels_last"),
         tfa.layers.GroupNormalization(groups=32, axis=3),
         layers.Flatten(),
         layers.Dense(96, activation="relu"),
         layers.Dense(96, activation="sigmoid"),
-        layers.Dense(10),
+        layers.Dense(10, activation="softmax"),
     ]
 )
 
@@ -30,8 +32,17 @@ model.compile(
     metrics=["accuracy"],
 )
 
+# Setup tensorboard visualization
+log_dir = "./logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+tensorboard_cb = tf.keras.callbacks.TensorBoard(log_dir=log_dir, histogram_freq=1)
+
 # Fit model to dataset
-model.fit(dataset.training, validation_data=dataset.validation, epochs=8)
+model.fit(
+    dataset.training,
+    validation_data=dataset.validation,
+    epochs=12,
+    callbacks=[tensorboard_cb],
+)
 
 if __name__ == "__main__":
     # Evaluate the performance of the model, based on loss and accuracy

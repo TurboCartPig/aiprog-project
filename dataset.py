@@ -28,7 +28,7 @@ color_mode = "rgb"
 batch_size = 32
 image_size = (256, 256)
 seed = 1223334444
-validation_split = 0.3
+validation_split = 0.2
 subset = "training"
 interpolation = "lanczos5"
 
